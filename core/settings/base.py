@@ -17,6 +17,7 @@ LOCAL_APPS = [
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+# INSTALLED_APPS = DJANGO_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -37,7 +38,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'apps', 'customers', 'templates')
+            # os.path.join(BASE_DIR, 'apps', 'customers', 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
