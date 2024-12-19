@@ -5,4 +5,16 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def customer_view(request):
     print("In customer view")
-    return render(request, 'customers.html', status=200)
+
+    customer_id = "101"
+    customer_name = "Morgan Stanley"
+
+    context = {
+        'customer_id': customer_id,
+        'customer_name': customer_name,
+        'customer_address': {
+            "street": "Kohefiza",
+            "city": "Bhopal"
+        }
+    }
+    return render(request, 'customers.html', context, status=200)
