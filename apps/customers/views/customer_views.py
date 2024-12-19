@@ -15,6 +15,23 @@ def customer_view(request):
         'customer_address': {
             "street": "Kohefiza",
             "city": "Bhopal"
-        }
+        },
+
+        "customers": [
+
+            {
+                "id": 101,
+                "name": "JPMC"
+            },
+            {
+                "id": 102,
+                "name": "Morgan Stanley"
+            },
+            {
+                "id": 103,
+                "name": "Wipro"
+            }
+        ]
     }
+
     return render(request, 'customers.html', context, status=200)

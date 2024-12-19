@@ -13,8 +13,27 @@
     <div>
         <p>Customer ID: {{ customer_id }}</p>
         <p>Customer Name: {{ customer_name }}</p>
-        <p>Address : {{customer_address.street}}  {{customer_address.city}}    </p>
+        <p>Address : {{customer_address.street}} {{customer_address.city}} </p>
     </div>
+    <hr/>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">ID</th>
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">{{ customer.id }}</td>
+            <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">{{ customer.name }}</td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 
 </div>
