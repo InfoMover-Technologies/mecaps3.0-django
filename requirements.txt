@@ -8,3 +8,5 @@ django-mongoengine==0.5.6
 django-ratelimit==4.1.0
 django-timezone-field==7.0
 djangorestframework==3.15.2
+certifi
+pymongo

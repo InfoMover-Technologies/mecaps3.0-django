@@ -1,6 +1,43 @@
 import os
 from pathlib import Path
 
+import certifi
+from mongoengine import connect, disconnect
+from pymongo import MongoClient
+
+# Disconnect any existing connections first
+disconnect()
+
+# MongoDB Connection Settings
+default_mongodb_url = 'mongodb+srv://shakir:mecaps@cluster0.zatib.mongodb.net/?retryWrites=true&w=majority'
+
+# Try to establish connection
+try:
+    # First verify connection using pymongo
+    client = MongoClient(
+        os.getenv('MONGODB_URI', default_mongodb_url),
+        ssl=True,
+        tlsCAFile=certifi.where()
+    )
+
+    # Test the connection
+    client.server_info()
+
+    # If successful, connect mongoengine
+    connect(
+        db='training',
+        host=os.getenv('MONGODB_URI', default_mongodb_url),
+        ssl=True,
+        tlsCAFile=certifi.where(),
+        alias='default'
+    )
+    print("MongoDB connection successful!")
+except Exception as e:
+    print(f"MongoDB connection failed: {str(e)}")
+    raise
+
+
+
 SECRET_KEY = 'django-insecure-your-secret-key-here'  # Change this in production
 
 DJANGO_APPS = [
