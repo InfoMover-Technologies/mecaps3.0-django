@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from apps.customers.model.customer import Customer
+
 
 @csrf_exempt
 def customer_view(request):
@@ -8,6 +10,14 @@ def customer_view(request):
 
     customer_id = "101"
     customer_name = "Morgan Stanley"
+
+    customers = Customer.objects.all()
+    # Convert documents to dictionaries with renamed id field
+    customer_list = [{
+        'id': str(customer._id),  # rename _id to id
+        'name': customer.name,
+        # other fields...
+    } for customer in customers]
 
     context = {
         'customer_id': customer_id,
@@ -17,21 +27,22 @@ def customer_view(request):
             "city": "Bhopal"
         },
 
-        "customers": [
-
-            {
-                "id": 101,
-                "name": "JPMC"
-            },
-            {
-                "id": 102,
-                "name": "Morgan Stanley"
-            },
-            {
-                "id": 103,
-                "name": "Wipro"
-            }
-        ]
+        "customers" : customer_list
+        # "customers": [
+        #
+        #     {
+        #         "id": 101,
+        #         "name": "JPMC"
+        #     },
+        #     {
+        #         "id": 102,
+        #         "name": "Morgan Stanley"
+        #     },
+        #     {
+        #         "id": 103,
+        #         "name": "Wipro"
+        #     }
+        # ]
     }
 
     return render(request, 'customers.html', context, status=200)
